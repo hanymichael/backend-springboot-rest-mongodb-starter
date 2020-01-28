@@ -5,7 +5,7 @@ metadata:
 data:
   # MongoDB URI
   # MONGODB_URI: mongodb://host.docker.internal/SpringProducts
-  MONGODB_URI: "mongodb://mongo-0.mongo,mongo-1.mongo,mongo-2.mongo:27017/SpringProducts_?"
+  MONGODB_URI: "mongodb://mongo-0.mongo,mongo-1.mongo,mongo-2.mongo:27017/SpringProducts"
 ---
 apiVersion: apps/v1
 kind: Deployment
