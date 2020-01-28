@@ -1,0 +1,51 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: backend-springboot-rest-configmap
+data:
+  # MongoDB URI
+  # MONGODB_URI: mongodb://host.docker.internal/SpringProducts
+  MONGODB_URI: "mongodb://mongo-0.mongo,mongo-1.mongo,mongo-2.mongo:27017/SpringProducts_?"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-springboot-rest
+  labels:
+    app: backend-springboot-rest
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: backend-springboot-rest
+  template:
+    metadata:
+      labels:
+        app: backend-springboot-rest
+    spec:
+      containers:
+        - name: backend-springboot-rest-mongodb-starter
+          image: hanymichael/backend-springboot-rest-mongodb-starter:v1
+          ports:
+            - containerPort: 8080
+          env:
+            - name: MONGODB_URI
+              valueFrom:
+                configMapKeyRef:
+                  name: backend-springboot-rest-configmap
+                  key: MONGODB_URI
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-springboot-rest-svc
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      #   nodePort: 30102
+      targetPort: 8080
+      protocol: TCP
+      name: http
+  selector:
+    app: backend-springboot-rest
