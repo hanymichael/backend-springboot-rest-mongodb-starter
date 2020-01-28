@@ -25,6 +25,8 @@ spec:
         role: mongo
         environment: test
     spec:
+      securityContext:
+        runAsUser: 10001
       terminationGracePeriodSeconds: 10
       containers:
         - name: mongo
@@ -50,8 +52,8 @@ spec:
     - metadata:
         name: mongo-persistent-storage
         annotations:
-          #   volume.beta.kubernetes.io/storage-class: "wcp-dev-storage" ### <-- Thi is the storage class ###
-          volume.beta.kubernetes.io/storage-class: "hostpath" ### <-- Thi is the storage class ###
+          volume.beta.kubernetes.io/storage-class: "wcp-dev-storage" ### <-- Thi is the storage class ###
+          # volume.beta.kubernetes.io/storage-class: "hostpath" ### <-- Thi is the storage class ###
       spec:
         accessModes: ["ReadWriteOnce"]
         resources:
