@@ -52,8 +52,9 @@ spec:
     - metadata:
         name: mongo-persistent-storage
         annotations:
-          volume.beta.kubernetes.io/storage-class: "wcp-dev-storage" ### <-- Thi is the storage class ###
-          # volume.beta.kubernetes.io/storage-class: "hostpath" ### <-- Thi is the storage class ###
+          # volume.beta.kubernetes.io/storage-class: "standard" ### <-- PUBLIC CLOUDS Storage Class ###
+          # volume.beta.kubernetes.io/storage-class: "wcp-dev-storage" ### <-- vSPHERE Storage Class ###
+          volume.beta.kubernetes.io/storage-class: "hostpath" ### <-- DOCKER K8S Storage Class ###
       spec:
         accessModes: ["ReadWriteOnce"]
         resources:

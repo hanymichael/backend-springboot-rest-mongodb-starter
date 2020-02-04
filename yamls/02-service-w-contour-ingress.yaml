@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: backend-springboot-rest
+  name: backend-springboot-rest-svc
+spec:
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: backend-springboot-rest
+  sessionAffinity: None
+  type: ClusterIP
+---
+apiVersion: contour.heptio.com/v1beta1
+kind: IngressRoute
+metadata:
+  labels:
+    app: backend-springboot-rest
+  name: backend-springboot-route
+  namespace: hany-springboot-app-mbp
+spec:
+  virtualhost:
+    fqdn: springapp.hany.dev
+  routes:
+    - match: /
+      services:
+        - name: backend-springboot-rest-svc
+          port: 80
