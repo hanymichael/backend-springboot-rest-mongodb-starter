@@ -1,5 +1,7 @@
 package com.hanymichaels.backend;
 
+import java.util.Date;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -13,17 +15,23 @@ public class Product {
 	private String productURI;
 	private String productUserName;
 	private String productPassword;
+	private Boolean isActive;
+	private Date createdAt;
 	
 	// The Constructor
 	public Product(String productName, String productType, String productURI, String productUserName,
-			String productPassword) {
+			String productPassword, Boolean isActive, Date createdAt) {
 		this.productName = productName;
 		this.productType = productType;
 		this.productURI = productURI;
 		this.productUserName = productUserName;
 		this.productPassword = productPassword;
+		this.isActive = isActive;
+		this.createdAt = createdAt;
+		
 	}
 	
+
 	// The Getters and Setters 
 	public String getId() {
 		return id;
@@ -72,6 +80,25 @@ public class Product {
 	public void setProductPassword(String productPassword) {
 		this.productPassword = productPassword;
 	}
+	
+	public Boolean getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(Boolean isActive) {
+		this.isActive = isActive;
+	}
+
+	
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+
 	
 	
 
